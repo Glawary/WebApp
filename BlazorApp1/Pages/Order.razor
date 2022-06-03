@@ -1,0 +1,115 @@
+﻿@page "/order/{CustomerId}/{TripId}"
+@using BlazorApp1.Services
+@inject NavigationManager _navigationManager
+
+<PageTitle>Заказ</PageTitle>
+<h3 class ="up">Информация о заказе</h3>
+@if (CurrentCustomer != null)
+{
+    <div class="customerBlock">
+        <div class="field">
+            <label class="label color_font">Номер заказа</label> <input class="form-control valueField" type="text" value="@CurrentCustomer.CustomerId" aria-label="Disabled input example" disabled readonly>
+        </div>
+        <div class="field">
+            <label class="label color_font">ФИО</label> <input class="form-control valueField" type="text" value="@CurrentCustomer.FullName" aria-label="Disabled input example" disabled readonly>
+        </div>
+        <div class="field">
+            <label class="label color_font">Электронная почта</label> <input class="form-control valueField" type="text" value="@CurrentCustomer.Email" aria-label="Disabled input example" disabled readonly>
+        </div>
+        <div class="field">
+            <label class="label color_font">Мобильный телефон</label> <input class="form-control valueField" type="text" value="@CurrentCustomer.PhoneNumber" aria-label="Disabled input example" disabled readonly>
+        </div>
+    </div>
+    <h3 class ="up">Путёвка</h3>
+    <table class="table color_font">
+        <thead>
+        <th >Краткое описание</th>
+        <th >Количество дней</th>
+        <th>Цена</th>
+        </thead>
+        <tbody>
+            <tr >
+                <td>@CurrentCustomer.Trip.ShortDescription</td>
+                <td>@CurrentCustomer.Trip.NumberDays</td>
+                <td>@CurrentCustomer.Trip.Price</td>
+            </tr>
+        </tbody>
+    </table>
+    <h3 class ="up">Страна</h3>
+    <table class="table color_font">
+        <thead>
+        <th >Название страны</th>
+        <th >Код страны</th>
+        <th>Климат</th>
+        <th>Язык</th>
+        <th>Количество городов</th>
+        </thead>
+        <tbody>
+            <tr >
+                <td>@CurrentTrip.Country.CountryName</td>
+                <td>@CurrentTrip.Country.Code</td>
+                <td>@CurrentTrip.Country.Climate</td>
+                <td>@CurrentTrip.Country.Language</td>
+                <td>@CurrentTrip.Country.NumberCities</td>
+            </tr>
+        </tbody>
+    </table>
+    <h3 class ="up">Отель</h3>
+    <table class="table color_font">
+        <thead>
+        <th >Название отеля</th>
+        <th >Статус отеля</th>
+        <th>Описание отеля</th>
+        </thead>
+        <tbody>
+            <tr >
+                <td>@CurrentTrip.Hotel.HotelName</td>
+                <td>@CurrentTrip.Hotel.HotelStatus</td>
+                <td>@CurrentTrip.Hotel.HotelDescription</td>
+            </tr>
+        </tbody>
+    </table>
+    <h3 class ="up">Авиалиния</h3>
+    <table class="table color_font">
+        <thead>
+        <th >Название авиаперелёта</th>
+        <th >Уровень комфорта</th>
+        <th>Количество часов полёта</th>
+        </thead>
+        <tbody>
+            <tr >
+                <td>@CurrentTrip.Air_Flight.CompanyName</td>
+                <td>@CurrentTrip.Air_Flight.LevelComfort</td>
+                <td>@CurrentTrip.Air_Flight.NumberHours</td>
+            </tr>
+        </tbody>
+    </table>
+     <button style ="position: relative;left: 50%;transform: translate(-50%, 0); margin: 20px; font-size: 12pt;" @onclick="()=>toItemChange()" type="button" class="btn btn-outline-primary">Сделать изменения</button>
+}
+
+
+@code {
+    [Parameter]
+    public string CustomerId {get; set;} = null!;
+    [Parameter]
+    public string TripId { get; set; } = null!;
+
+    private Data.Models.Customer? CurrentCustomer { get; set; }
+    private Data.Models.Trip? CurrentTrip { get; set; }
+
+    [Inject]
+    private ICustomerProvider customersProvider { get; set; } = null!;
+    [Inject]
+    private ITripProvider tripsProvider { get; set; } = null!;
+
+
+    protected async override Task OnInitializedAsync()
+    {
+        CurrentCustomer = await customersProvider.GetOne(Int32.Parse(CustomerId));
+        CurrentTrip = await tripsProvider.GetOne(Int32.Parse(TripId));
+    }
+    private async void toItemChange()
+    {
+       _navigationManager.NavigateTo($"/orders/change/{CustomerId}");
+    }
+}

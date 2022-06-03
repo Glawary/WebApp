@@ -1,0 +1,236 @@
+body {
+    background-color: green;
+    overflow-y: scroll;
+    width: 100%;
+    margin: 0;
+}
+.header {
+    background-color: hsla(60, 100%, 90%, 0.7);
+    padding: 30px;
+    text-align: center;
+    margin: auto;
+    color: black;
+}
+.footer {
+    bottom: 0;
+    font-size: 6px;
+    margin: 0;
+    padding: 10px;
+    width: 100%;
+    background-color: hsla(60, 100%, 90%, 0.7);
+    text-align: center;
+}
+.footer p {
+    font-family: "Times New Roman" Times;
+    font-size: 18px;
+}
+.footer .footer_phrase p{
+    padding-top: 10px; 
+    font-size: 30px;
+    font-weight: 600;
+}
+.footer .container-fluid {
+    margin: 20px 0 10px;;
+}
+
+.active {
+    background-color: #4CAF50;
+}
+
+img {
+    height: 275px;
+    width: 470px;
+    margin: auto;
+    display:block;
+}
+.image {
+    height: 275px;
+    width: 470px;
+    margin: auto;
+    display: block;
+}
+.navbar_style {
+    background-color: rgb(24, 43, 7); 
+    position: sticky; 
+    top: 0;
+}
+.navbar_style a {
+    color: white;
+}
+.main {
+    color: white;
+    margin: 30px;
+}
+.index .greeting {
+    margin: 40px;
+}
+.index h1 {
+    color: black;
+}
+.index .greeting p {
+    font-family: "Times New Roman" Times;
+    font-size: 30px;
+    text-align: center;
+}
+.catalog h1 {
+    color: black;
+}
+.catalog a {
+    text-decoration: none;
+}
+.catalog .main .row_distance {
+    margin-top: 25px;
+    margin-bottom: 50px;
+}
+.catalog .contain{
+    position: relative;
+    width: 470px;
+    height: 275px;
+    display: block;
+    margin: auto;
+}
+.catalog .container-fluid h2 {
+    text-align: center;
+    color: white;
+    font-family: "Times New Roman" Times;
+    margin: 30px;
+}
+.catalog .contain:hover .overlay {
+    opacity: 1;
+}
+.catalog .overlay {
+    position: absolute;
+    bottom: 0;
+    width: 470px;
+    height: 275px;
+    opacity: 0;
+    transition: 0.5s ease;
+    background-color: hsla(20, 100%, 100%, 0.88);
+}
+.catalog .text {
+    color: black;
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.catalog .text p {
+    text-align: center;
+}
+.item .content {
+    margin: 30px 40px 0;
+}
+.item .main h1 {
+    text-align: center;
+}
+.item .main .link {
+    height: 275px;
+    width: 470px;
+    display: block;
+    margin: auto;
+}
+.item .main h4 {
+    border-radius: 25px;
+    text-align: center;
+    font-family: "Times New Roman" Times;
+    padding: 15px;
+    width: 100%;
+    height: auto;
+    color: black;
+    font-size: 20px;
+    font-weight: 400;
+    background-color: #eaeaea;
+}
+.item .main a {
+    text-decoration: none;
+}
+.item .main a:hover {
+    font-weight: 600;
+}
+.item .short-description {
+    font-size: 18px;
+    font-style: italic;
+    font-family: Arial Verdana;
+    line-height: 1.4;
+    text-align: justify;
+}
+.item .long-description {
+    font-size: 18px;
+    font-family: Arial Verdana;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: justify;
+}
+.item .characteristics ul {
+    list-style: inside url("../images/marker2.png");
+    margin: 25px;
+    padding: 0;
+}
+.item .characteristics ul li {
+    font-family: Arial Verdana;
+    font-size: 17px;
+}
+.item .main .color {
+    color: black;
+}
+.index .main .distance {
+    margin-bottom: 50px;
+}
+.item .panel-bottom {
+    margin-bottom: 50px;
+}
+.item .main .img-top {
+    margin-top: 40px;
+}
+.item .main .starting-top {
+    margin-top: 30px;
+}
+
+
+.field {
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+}
+
+.customerBlock {
+    display: flex;
+    flex-direction: column;
+}
+
+.label {
+    width: 200px;
+}
+
+.valueField {
+    width: 400px;
+}
+
+.artCustomers {
+    display: flex;
+    flex-direction: column;
+}
+
+.customerTag {
+    padding: 5px;
+    margin-top: 5px;
+    border: 1px solid #8b008bff;
+    border-radius: 8px;
+    background-color: #ff00ff44;
+}
+.color_font{
+    color: white;
+    font-size: 12pt;
+    border: 2px solid white;
+}
+.up {
+    text-align: center;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.cool {
+    text-align: center;
+    color: white;
+}

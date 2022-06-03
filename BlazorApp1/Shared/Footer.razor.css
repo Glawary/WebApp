@@ -1,0 +1,24 @@
+﻿.footer {
+    bottom: 0;
+    font-size: 6px;
+    margin: 0;
+    padding: 10px;
+    width: 100%;
+    background-color: hsla(60, 100%, 90%, 0.7);
+    text-align: center;
+}
+.footer p {
+    font-family: "Times New Roman" Times;
+    font-size: 18px;
+}
+.footer .footer_phrase p{
+    padding-top: 10px; 
+    font-size: 30px;
+    font-weight: 600;
+}
+.footer .container-fluid {
+    margin: 20px 0 10px;;
+}
+@code {
+
+}

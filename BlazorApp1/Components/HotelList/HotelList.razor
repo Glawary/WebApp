@@ -1,0 +1,52 @@
+﻿@using BlazorApp1.Data.Models
+@using BlazorApp1.Services
+
+@inject NavigationManager _navigationManager
+
+
+@if (Hotels == null)
+{
+    <p>Поиск доступных отелей</p>
+}
+else if (Hotels.Count == 0)
+{
+    <p>Не получилось доступные отели</p>
+}
+else
+{
+    <table class="table color_font">
+        <thead>
+        <tr>
+            <th>№</th>
+            <th>Название отеля</th>
+            <th>Статус</th>
+            <th>Особенность отеля</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        @foreach (var hotel in Hotels)
+        {
+            <tr>
+                <td>@hotel.HotelId</td>
+                <td>@hotel.HotelName</td>
+                <td>@hotel.HotelStatus</td>
+                <td>@hotel.HotelDescription</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+
+@code {
+    private List<Hotel>? Hotels { get; set; }
+
+    [Inject]
+    private IHotelProvider HotelsProvider { get; set; } = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Hotels = await HotelsProvider.GetAll();
+    }
+}

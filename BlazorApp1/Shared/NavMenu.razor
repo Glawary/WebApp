@@ -1,0 +1,31 @@
+﻿<nav class="navbar navbar-static-top navbar_style">
+          <div class = "container-fluid">
+            @*<a class="navbar-brand" href="#">Чудеса света</a>*@
+            <ul class="nav navbar-nav">
+              @*<li><NavLink activeClassName="active" href="/">Главная</NavLink></li>*@
+              @*<li><NavLink href="/" activeClassName="active-link">Главная</NavLink></li>*@
+              <li class="nav-item @GetActive("", NavLinkMatch.All)"><NavLink class="nav-link" href="/" Match="NavLinkMatch.All">Главная</NavLink></li>
+              <li><NavLink href="/catalog">Каталог<span class="badge">6</span></NavLink></li>
+              <li><NavLink href="/orders">Заказы</NavLink></li>
+              <li><NavLink href="/countries">Страны</NavLink></li>
+              <li><NavLink href="/hotels">Отели</NavLink></li>
+              <li><NavLink href="/air_flights">Авиалинии</NavLink></li>
+            </ul>
+          </div> 
+</nav>
+
+
+@code {
+    [Inject]
+    NavigationManager NavigationManager { get; set; }
+
+    protected override void OnInitialized() => NavigationManager.LocationChanged += (s, e) => StateHasChanged();
+
+    bool IsActive(string href, NavLinkMatch navLinkMatch = NavLinkMatch.Prefix)
+    {
+        var relativePath = NavigationManager.ToBaseRelativePath(NavigationManager.Uri).ToLower();
+        return navLinkMatch == NavLinkMatch.All ? relativePath == href.ToLower() : relativePath.StartsWith(href.ToLower());
+    }
+
+    string GetActive(string href, NavLinkMatch navLinkMatch = NavLinkMatch.Prefix) => IsActive(href, navLinkMatch) ? "active" : "";
+}

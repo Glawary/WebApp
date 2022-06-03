@@ -1,0 +1,85 @@
+﻿@page "/trip/{TripId}"
+@using BlazorApp1.Services
+@inject NavigationManager _navigationManager
+
+
+<PageTitle>Путёвка</PageTitle>
+
+@if (CurrentTrip == null)
+{
+    <p>Поиск подходящих путёвок</p>
+}
+else
+{
+    <div class ="item">
+        <div class = "main">
+            <div class="starting-top">
+                <h1>@CurrentTrip.Country.CountryName</h1>
+                <div class="img-top">
+                    <a href = "../images/@CurrentTrip.Picture" alt = "Греция" target="_blank" class="link"><img src = "../images/@CurrentTrip.Picture" alt = "Греция">
+                    </a>
+                </div>
+            </div>
+            <br>
+            <div class = "content">
+                <div class="panel-group panel-bottom" id="this">
+                    <div class = "panel panel-default">
+                        <div class = "panel-heading">
+                            <h4 class = "panel-title">
+                                <a data-toggle="collapse" data-parent= "#this" href="#collapse_first">Краткое описание поездки</a>
+                            </h4>
+                        </div> 
+                        <div id="collapse_first" class="panel-collapse collapse in">
+                            <div class="panel-body short-description color">@CurrentTrip.ShortDescription</div>
+                        </div>
+                    </div>
+                    <div class ="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#this" href="#collapse_second">Полное описание поездки</a>
+                            </h4>
+                        </div>
+                        <div id ="collapse_second" class="panel-collapse collapse">
+                            <div class="panel-body long-description color">@CurrentTrip.LongDescription</div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#this" href="#collapse_third">Плюсы поездки</a>
+                            </h4>
+                        </div>
+                        <div id="collapse_third" class="panel-collapse collapse">
+                            <div class="panell-body">
+                                <div class = "characteristics color">
+                                    <ul>
+                                        <li>@CurrentTrip.Characteristics1</li>
+                                        <li>@CurrentTrip.Characteristics2</li>
+                                        <li>@CurrentTrip.Characteristics3</li>
+                                        <li>@CurrentTrip.Characteristics4</li> 
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+}
+
+
+@code {
+    [Parameter]
+    public string TripId { get; set; } = null!;
+
+    private Data.Models.Trip? CurrentTrip { get; set; }
+
+    [Inject]
+    private ITripProvider tripsProvider { get; set; } = null!;
+
+    protected async override Task OnInitializedAsync()
+    {
+        CurrentTrip = await tripsProvider.GetOne(Int32.Parse(TripId));
+    }
+}

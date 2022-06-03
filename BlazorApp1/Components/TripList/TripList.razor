@@ -1,0 +1,55 @@
+﻿@using BlazorApp1.Data.Models
+@using BlazorApp1.Services
+@inject NavigationManager _navigationManager
+
+@if (Trips == null)
+{
+    <p>Поиск подходящих путёовк</p>
+}
+else if (Trips.Count == 0)
+{
+    <p>Нет путёовк</p>
+}
+else
+{
+ <div class = "catalog">
+<div class="container-fluid main">
+    @foreach (var trip in Trips)
+{     
+           <div @onclick="()=>toItem(trip)" class="col-sm-6">
+                  <h2>@trip.Country.CountryName</h2>
+                  <div @onclick="()=>toItem(trip)" class = "contain">
+                      <img src= "../images/@trip.Picture" alt="@trip.Country.CountryName" class = "image">
+                      @*< href="/catalog/greece" target="_self">*@
+                        <div class = "overlay">
+                             <div class = "text">
+                                 <p>Цена путёвки: @trip.Price$</p>
+                                 <br>
+                                 <p>Количество дней: @trip.NumberDays</p>
+                             </div>
+                         </div>
+                      @*</>*@
+                  </div>
+              </div>
+}
+        </div>
+</div>
+}
+
+@code {
+    private List<Trip>? Trips { get; set; }
+
+    [Inject]
+    private ITripProvider tripsProvider { get; set; } = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Trips = await tripsProvider.GetAll();
+    }
+
+    private void toItem(Trip trip)
+    {
+        _navigationManager.NavigateTo($"trip/{trip.TripId}");
+    }
+    
+}

@@ -1,0 +1,75 @@
+﻿@page "/orders/change/{CustomerId}"
+@using BlazorApp1.Services
+@using BlazorApp1.Data.Models;
+@using BlazorApp1.Data.DTOs;
+@inject NavigationManager _navigationManager
+
+<PageTitle>Изменить заказ</PageTitle>
+
+<h1 style = "color:white;text-align:center;margin:20px;">Изменить данные о заказе</h1>
+@if(CurrentCustomer != null){
+<div class="customerBlock">
+    <div class="field">
+            <label class="label color_font">Номер заказа</label> <input class="form-control valueField" type="text"  @bind="inputValue1" disabled readonly>
+        </div>
+        <div class="field">
+            <label class="label color_font">ФИО</label> <input class="form-control valueField" type="text"  @bind="inputValue2">
+        </div>
+        <div class="field">
+            <label class="label color_font">Электронная почта</label> <input class="form-control valueField" type="text" @bind="inputValue3">
+        </div>
+        <div class="field">
+            <label class="label color_font">Мобильный телефон</label> <input class="form-control valueField" type="text" @bind="inputValue4">
+        </div>
+        <div class="field">
+            <label class="label color_font">Номер путёвки</label> <input class="form-control valueField" type="text" @bind="inputValue5" disabled readonly>
+        </div>
+    </div>
+}
+<button style ="position: relative;left: 30%; margin: 20px; font-size: 12pt;" @onclick="()=>toItemUpdate()" type="button" class="btn btn-outline-primary">Изменить заказ</button>
+<button style ="position: relative;left: 40%; margin: 20px; font-size: 12pt;" @onclick="()=>toItemDelete()" type="button" class="btn btn-outline-primary">Удалить заказ</button>
+
+
+@code {
+    [Parameter]
+    public string CustomerId { get; set; } = null!;
+
+    private Data.Models.Customer? CurrentCustomer{ get; set; }
+
+    private int inputValue1 { get; set; }
+    private string? inputValue2 { get; set; }
+    private string? inputValue3 { get; set; }
+    private string? inputValue4 { get; set; }
+    private int inputValue5 { get; set; }
+
+
+    [Inject]
+    private ICustomerProvider customersProvider { get; set; } = null!;
+
+    protected async override Task OnInitializedAsync()
+    {
+        CurrentCustomer = await customersProvider.GetOne(Int32.Parse(CustomerId));
+        inputValue1 = CurrentCustomer.CustomerId;
+        inputValue2 = CurrentCustomer.FullName;
+        inputValue3 = CurrentCustomer.Email;
+        inputValue4 = CurrentCustomer.PhoneNumber;
+        inputValue5 = CurrentCustomer.Trip.TripId;
+    }
+
+    private async void toItemUpdate()
+    {
+        CustomerDTO UpdatedCustomer = new CustomerDTO
+        {
+            FullName = inputValue2,
+            Email = inputValue3,
+            PhoneNumber = inputValue4
+        };
+        await customersProvider.Edit(Int32.Parse(CustomerId),UpdatedCustomer);
+        _navigationManager.NavigateTo($"/orders");
+    }
+    private async void toItemDelete()
+    {
+       await customersProvider.Remove(Int32.Parse(CustomerId));
+       _navigationManager.NavigateTo($"/orders");
+    }
+}

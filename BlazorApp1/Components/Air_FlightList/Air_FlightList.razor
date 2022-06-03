@@ -1,0 +1,52 @@
+﻿@using BlazorApp1.Data.Models
+@using BlazorApp1.Services
+
+@inject NavigationManager _navigationManager
+
+
+@if (Air_Flights == null)
+{
+    <p>Поиск доступных авиалиний</p>
+}
+else if (Air_Flights.Count == 0)
+{
+    <p>Не получилось доступные авиалинии</p>
+}
+else
+{
+    <table class="table color_font">
+        <thead>
+        <tr>
+            <th>№</th>
+            <th>Название авиалинии</th>
+            <th>Уровень комфорта</th>
+            <th>Количество часов в полёте</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        @foreach (var air_flight in Air_Flights)
+        {
+            <tr>
+                <td>@air_flight.Air_FlightId</td>
+                <td>@air_flight.CompanyName </td>
+                <td>@air_flight.LevelComfort</td>
+                <td>@air_flight.NumberHours</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+
+@code {
+    private List<Air_Flight>? Air_Flights{ get; set; }
+
+    [Inject]
+    private IAir_FlightProvider Air_FlightProvider{ get; set; } = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Air_Flights = await Air_FlightProvider.GetAll();
+    }
+}

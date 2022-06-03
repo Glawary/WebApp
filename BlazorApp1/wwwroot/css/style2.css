@@ -1,0 +1,380 @@
+/*
+.footer{
+    position: fixed;
+    left: 0; bottom: 0;
+    padding: 5px;
+    color: #000;
+    width: 100%;
+    text-align: center;
+}
+body {
+    margin: 50px;
+    background:#f1f1f1;
+    background-image: url("../images/green.jpeg");
+}
+
+a:link {
+    color: dimgrey;
+}
+a:visited {
+    color: darkred
+}
+a:hover {
+    color: hotpink;
+}
+a:active {
+    color: blue;
+}
+ul {
+    list-style-type: none;
+    font-family: "Times New Roman" Times;
+    color: black;
+    font-size: 20px;
+}
+ol {
+    list-style-type: none;
+}
+.head{
+    text-align: center;
+}
+.purchase {
+    color: black;
+    text-shadow: 2px 2px 4px #000000;
+    font-size: 35px;
+    font-weight: 400;
+    width: 400px;
+    text-align: center;
+}
+.short {
+    color: #707070;
+    font-size: 14px;
+    font-style: italic;
+    line-height: 16px;
+    margin-right: 700px;
+}
+.big {
+    color: #48343;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: left;
+    margin-right: 700px;
+}
+.characteristics {
+    font-style: italic;
+    padding: 0px 700px 15px 0px; 
+}
+
+
+*/
+body {
+    background-color: green;
+    overflow-y: scroll;
+    width: 100%;
+    margin: 0;
+}
+.header {
+    background-color: hsla(60, 100%, 90%, 0.7);
+    padding: 30px;
+    text-align: center;
+    margin: auto;
+    color: black;
+/*    height: 22vh;*/
+}
+.footer {
+    bottom: 0;
+    font-size: 6px;
+    margin: 0;
+    padding: 10px;
+/*    height: 4vh;*/
+    width: 100%;
+    background-color: hsla(60, 100%, 90%, 0.7);
+/*    padding: auto;*/
+    text-align: center;
+}
+.footer p {
+    font-family: "Times New Roman" Times;
+    font-size: 18px;
+}
+.active {
+    background-color: #4CAF50;
+/*    background-color: green;*/
+}
+.list {
+/*    height: 7vh;*/
+    position: sticky;
+    top: 0;
+    z-index: +1;
+    background-color: rgb(24, 43, 7);
+}
+.list ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(24, 43, 7);
+}
+.list ul li{
+    float: left;
+    border-right: 1px solid #bbb;
+}
+.list ul li a{
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+.list ul li a:hover {
+    background-color: #ddd;
+    color: black;
+}
+img {
+    height: 275px;
+    width: 470px;
+    margin: auto;
+    display:block;
+}
+.main {
+    color: white;
+    margin: 30px;
+}
+/*
+.index .main {
+    height: 65vh;
+}
+*/
+.index .greeting {
+    margin: 40px;
+}
+.index h1 {
+    color: black;
+}
+.index .greeting p {
+    font-family: "Times New Roman" Times;
+    font-size: 30px;
+    text-align: center;
+}
+.catalog div.gallery{
+    height: 320px;
+    background-color: none;
+    width: 470px;
+    margin: 50px 50px 120px 50px;
+    float: left;
+    border: none;
+}
+.catalog h1 {
+    color: black;
+}
+.catalog a {
+    text-decoration: none;
+}
+.catalog .big-gallery{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-color: none; 
+    margin: 10px;
+}
+.catalog div.gallery h2,p{
+    text-align: center;
+    font-family: "Times New Roman" Times;
+    margin: auto;
+    margin-bottom: 0;
+}
+.contain{
+    position: relative;
+    width: 470px;
+    height: 275px;
+    display: block;
+    margin: auto;
+}
+.container-fluid h2 {
+    text-align: center;
+    color: white;
+    font-family: "Times New Roman" Times;
+    margin: 30px;
+}
+.contain:hover .overlay {
+    opacity: 1;
+}
+.overlay {
+    position: absolute;
+    bottom: 0;
+    width: 470px;
+    height: 275px;
+/*
+    height: 100%;
+    width: 100%;
+*/
+    opacity: 0;
+    transition: .5s ease;
+    background-color: hsla(20, 100%, 100%, 0.88);
+}
+.text {
+    color: black;
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.item .content {
+    margin: 30px 40px 0;
+}
+.item .main h1 {
+    text-align: center;
+}
+.item .main .link {
+    height: 275px;
+    width: 470px;
+    display: block;
+    margin: auto;
+}
+/*
+.item .main h2 {
+    border-radius: 25px;
+    text-align: center;
+    font-family: "Times New Roman" Times;
+    padding: 15px;
+    width: 200px;
+    height: 30px;
+    color: black;
+    font-size: 20px;
+    font-weight: 400;
+    background-color: #eaeaea;
+}
+*/
+.item .main h4 {
+    border-radius: 25px;
+    text-align: center;
+    font-family: "Times New Roman" Times;
+    padding: 15px;
+    width: 100%;
+    height: auto;
+    color: black;
+    font-size: 20px;
+    font-weight: 400;
+    background-color: #eaeaea;
+}
+.item .main a {
+    text-decoration: none;
+}
+.item .main a:hover {
+    font-weight: 600;
+}
+.item .short-description {
+    font-size: 18px;
+    font-style: italic;
+    font-family: Arial Verdana;
+    line-height: 1.4;
+    text-indent: 50px;
+    text-align: justify;
+}
+.item .long-description {
+    font-size: 18px;
+    font-family: Arial Verdana;
+    font-weight: 400;
+    line-height: 24px;
+    text-indent: 50px;
+    text-align: justify;
+}
+.item .distance .div {
+    margin: 45px 60px;
+}
+/*
+.item .characteristics {
+    margin-bottom: 30px;
+}
+*/
+.item .characteristics ul {
+    list-style: inside url("../images/marker2.png");
+    vertical-align: sub;
+    margin: 25px;
+    padding: 0;
+}
+.item .characteristics ul li {
+    font-family: Arial Verdana;
+    font-size: 17px;
+}
+.item .main .color {
+    color: black;
+}
+.image {
+    height: 275px;
+    width: 470px;
+    margin: auto;
+    display: block;
+}
+.index .main .distance {
+    margin-bottom: 50px;
+}
+.index .main .radius {
+    border-radius: 50%;
+}
+.catalog .height{
+    height: 320px;
+    background-color: none;
+    width: 470px;
+    margin: auto;
+    display: block;
+    border: none;
+}
+.dist {
+    margin-top: 25px;
+    margin-bottom: 50px;
+}
+.catalog cont h2,p{
+  
+}
+@media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height: auto;} 
+}
+.footer .ending p{
+    padding-top: 10px; 
+    font-size: 30px;
+    font-weight: 600;
+}
+.footer .container-fluid {
+    margin: 20px 0 10px;;
+}
+.panel-bottom {
+    margin-bottom: 50px;
+}
+.img-top {
+    margin-top: 40px;
+}
+.starting-top {
+    margin-top: 30px;
+}
+
+
+.item .distance div {
+    margin: 45px 60px;
+}
+/*
+.catalog .height{
+    height: 320px;
+    background-color: none;
+    width: 470px;
+    margin: auto;
+    display: block;
+    border: none;
+}
+*/
+/*
+@media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height: auto;} 
+}
+*/
+@media screen and (max-width: 770px) {
+      .row.content {height: auto;} 
+}
+

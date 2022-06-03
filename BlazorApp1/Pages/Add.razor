@@ -1,0 +1,48 @@
+﻿@page "/orders/add"
+@using BlazorApp1.Services
+@using BlazorApp1.Data.Models;
+@using BlazorApp1.Data.DTOs;
+@inject NavigationManager _navigationManager
+
+<PageTitle>Оформить заказ</PageTitle>
+
+<h1 style = "color:white;text-align:center;margin:20px;">Оформить новый заказ</h1>
+
+ <div class="customerBlock">
+        <div class="field">
+            <label class="label color_font">ФИО</label> <input class="form-control valueField" type="text"  @bind="inputValue1">
+        </div>
+        <div class="field">
+            <label class="label color_font">Электронная почта</label> <input class="form-control valueField" type="text" @bind="inputValue2">
+        </div>
+        <div class="field">
+            <label class="label color_font">Мобильный телефон</label> <input class="form-control valueField" type="text" @bind="inputValue3">
+        </div>
+        <div class="field">
+            <label class="label color_font">Номер путёвки</label> <input class="form-control valueField" type="text" @bind="inputValue4">
+        </div>
+    </div>
+ <button style ="position: relative;left: 50%;transform: translate(-50%, 0); margin: 20px; font-size: 12pt;" @onclick="()=>toItem1()" type="button" class="btn btn-outline-primary">Оформить заказ</button>
+@code {
+    private string? inputValue1 { get; set; }
+    private string? inputValue2 { get; set; }
+    private string? inputValue3 { get; set; }
+    private int inputValue4 { get; set; }
+
+    private Customer? CurrentCustomer{ get; set; }
+
+    [Inject]
+    private ICustomerProvider customersProvider { get; set; } = null!;
+    private async void toItem1()
+    {
+        CustomerDTO NewCustomer = new CustomerDTO
+        {
+            FullName = inputValue1,
+            Email = inputValue2,
+            PhoneNumber = inputValue3,
+            TripId = inputValue4
+        };
+       await customersProvider.Add(NewCustomer);
+        _navigationManager.NavigateTo($"/orders");
+    }
+}

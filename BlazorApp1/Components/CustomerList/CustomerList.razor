@@ -1,0 +1,64 @@
+﻿@using BlazorApp1.Data.Models
+@using BlazorApp1.Services
+
+@inject NavigationManager _navigationManager
+
+
+@if (Customers == null)
+{
+    <p>Поиск успешных заказов</p>
+}
+else if (Customers.Count == 0)
+{
+    <p>Не получилось найти заказы</p>
+}
+else
+{
+    <table class="table color_font">
+        <thead>
+        <tr>
+            <th>Номер</th>
+            <th>Полное имя</th>
+            <th>Электронная почта</th>
+            <th>Мобильный телефон</th>
+            <th>Номер путёвки</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        @foreach (var customer in Customers)
+        {
+            <tr  @onclick="()=>toItem(customer)" >
+                <td>@customer.CustomerId</td>
+                <td>@customer.FullName</td>
+                <td>@customer.Email</td>
+                <td>@customer.PhoneNumber</td>
+                <td>@customer.Trip.TripId</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    <button style ="position: relative;left: 50%;transform: translate(-50%, 0); margin: 20px; font-size: 12pt;" @onclick="()=>toItemAdd()" type="button" class="btn btn-outline-primary">Оформить новый заказ</button>
+}
+
+
+@code {
+    private List<Customer>? Customers { get; set; }
+
+    [Inject]
+    private ICustomerProvider CustomersProvider { get; set; } = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Customers = await CustomersProvider.GetAll();
+    }
+
+    private void toItem(Customer customer)
+    {
+        _navigationManager.NavigateTo($"order/{customer.CustomerId}/{customer.Trip.TripId}");
+    }
+    private void toItemAdd()
+    {
+        _navigationManager.NavigateTo($"/orders/add");
+    }
+}

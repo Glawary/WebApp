@@ -1,0 +1,56 @@
+﻿@using BlazorApp1.Data.Models
+@using BlazorApp1.Services
+
+@inject NavigationManager _navigationManager
+
+
+@if (Countries == null)
+{
+    <p>Поиск доступных стран</p>
+}
+else if (Countries.Count == 0)
+{
+    <p>Не получилось доступные страны</p>
+}
+else
+{
+    <table class="table color_font">
+        <thead>
+        <tr>
+            <th>№</th>
+            <th>Название страны</th>
+            <th>Климат</th>
+            <th>Код страны</th>
+            <th>Язык</th>
+            <th>Количество городов</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        @foreach (var country in Countries)
+        {
+            <tr>
+                <td>@country.CountryId</td>
+                <td>@country.CountryName</td>
+                <td>@country.Climate</td>
+                <td>@country.Code</td>
+                <td>@country.Language</td>
+                <td>@country.NumberCities</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+
+@code {
+    private List<Country>? Countries { get; set; }
+
+    [Inject]
+    private ICountryProvider CountriesProvider { get; set; } = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Countries = await CountriesProvider.GetAll();
+    }
+}

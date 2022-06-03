@@ -1,0 +1,82 @@
+﻿@page "/"
+
+<PageTitle>Главная</PageTitle>
+
+<div class = "index">
+<div class = "main">
+            <div class = "greeting">
+                <p>Приветствую вас на нашем сайте туристических поездок</p>
+                <p>"Чудеса света"!</p>
+            </div>
+
+            <div class="image distance">
+                <div id="Carousel" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                       <li data-target="#Carousel" data-slide-to="0" class="active"></li>
+                       <li data-target="#Carousel" data-slide-to="1"></li>
+                       <li data-target="#Carousel" data-slide-to="2"></li>
+                       <li data-target="#Carousel" data-slide-to="3"></li>
+                       <li data-target="#Carousel" data-slide-to="4"></li>
+                       <li data-target="#Carousel" data-slide-to="5"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <div class = "image">
+                                <img src="../images/greece.jpeg" alt="Greece">
+                            </div>
+                        </div>
+
+                       <div class="item">
+                         <div class = "image">
+                                <img src="../images/spain.jpeg" alt="Spain">
+                            </div>
+                       </div>
+
+                       <div class="item">
+                            <div class = "image">
+                                <img src="../images/france.jpeg" alt="France">
+                            </div>
+                       </div>
+                       <div class="item">
+                            <div class = "image">
+                                <img src="../images/uae.jpeg" alt="UAE">
+                            </div>
+                       </div>
+                       <div class="item">
+                            <div class = "image">
+                                <img src="../images/canada.jpeg" alt="Canada">
+                            </div>
+                       </div>
+                       <div class="item">
+                           <div class = "image">
+                                <img src="../images/brazil.jpeg" alt="Brazil">
+                            </div>
+                       </div>
+                    </div>
+                    <a class="left carousel-control" href="#Carousel" data-slide="prev">
+                       <span class="glyphicon glyphicon-chevron-left radius"></span>
+                       <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#Carousel" data-slide="next">
+                       <span class="glyphicon glyphicon-chevron-right"> </span>
+                       <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+</div>
+@code{
+     [Inject]
+    NavigationManager NavigationManager { get; set; }
+
+    protected override void OnInitialized() => NavigationManager.LocationChanged += (s, e) => StateHasChanged();
+
+    bool IsActive(string href, NavLinkMatch navLinkMatch = NavLinkMatch.Prefix)
+    {
+        var relativePath = NavigationManager.ToBaseRelativePath(NavigationManager.Uri).ToLower();
+        return navLinkMatch == NavLinkMatch.All ? relativePath == href.ToLower() : relativePath.StartsWith(href.ToLower());
+    }
+
+    string GetActive(string href, NavLinkMatch navLinkMatch = NavLinkMatch.Prefix) => IsActive(href, navLinkMatch) ? "active" : "";
+}
+
